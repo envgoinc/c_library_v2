@@ -11181,7 +11181,7 @@ static void mavlink_test_esc_info(uint8_t system_id, uint8_t component_id, mavli
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_esc_info_t packet_in = {
-        93372036854775807ULL,{ 963497880, 963497881, 963497882, 963497883 },18483,{ 18587, 18588, 18589, 18590 },{ 19003, 19004, 19005, 19006 },3,70,137,204
+        93372036854775807ULL,{ 963497880, 963497881, 963497882, 963497883 },18483,{ 18587, 18588, 18589, 18590 },{ 19003, 19004, 19005, 19006 },3,70,137,204,{ 15, 16, 17, 18 }
     };
     mavlink_esc_info_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -11195,6 +11195,7 @@ static void mavlink_test_esc_info(uint8_t system_id, uint8_t component_id, mavli
         mav_array_memcpy(packet1.error_count, packet_in.error_count, sizeof(uint32_t)*4);
         mav_array_memcpy(packet1.failure_flags, packet_in.failure_flags, sizeof(uint16_t)*4);
         mav_array_memcpy(packet1.temperature, packet_in.temperature, sizeof(int16_t)*4);
+        mav_array_memcpy(packet1.state, packet_in.state, sizeof(uint8_t)*4);
         
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
         if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
@@ -11208,12 +11209,12 @@ static void mavlink_test_esc_info(uint8_t system_id, uint8_t component_id, mavli
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_esc_info_pack(system_id, component_id, &msg , packet1.index , packet1.time_usec , packet1.counter , packet1.count , packet1.connection_type , packet1.info , packet1.failure_flags , packet1.error_count , packet1.temperature );
+    mavlink_msg_esc_info_pack(system_id, component_id, &msg , packet1.index , packet1.time_usec , packet1.counter , packet1.count , packet1.connection_type , packet1.info , packet1.failure_flags , packet1.error_count , packet1.temperature , packet1.state );
     mavlink_msg_esc_info_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_esc_info_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.index , packet1.time_usec , packet1.counter , packet1.count , packet1.connection_type , packet1.info , packet1.failure_flags , packet1.error_count , packet1.temperature );
+    mavlink_msg_esc_info_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.index , packet1.time_usec , packet1.counter , packet1.count , packet1.connection_type , packet1.info , packet1.failure_flags , packet1.error_count , packet1.temperature , packet1.state );
     mavlink_msg_esc_info_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -11226,7 +11227,7 @@ static void mavlink_test_esc_info(uint8_t system_id, uint8_t component_id, mavli
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_esc_info_send(MAVLINK_COMM_1 , packet1.index , packet1.time_usec , packet1.counter , packet1.count , packet1.connection_type , packet1.info , packet1.failure_flags , packet1.error_count , packet1.temperature );
+    mavlink_msg_esc_info_send(MAVLINK_COMM_1 , packet1.index , packet1.time_usec , packet1.counter , packet1.count , packet1.connection_type , packet1.info , packet1.failure_flags , packet1.error_count , packet1.temperature , packet1.state );
     mavlink_msg_esc_info_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
