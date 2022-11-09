@@ -6,61 +6,61 @@
 
 typedef struct __mavlink_esc_info_t {
  uint64_t time_usec; /*< [us] Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude the number.*/
- uint32_t error_count[4]; /*<  Number of reported errors by each ESC since boot.*/
+ uint32_t error_count[8]; /*<  Number of reported errors by each ESC since boot.*/
  uint16_t counter; /*<  Counter of data packets received.*/
- uint16_t failure_flags[4]; /*<  Bitmap of ESC failure flags.*/
- int16_t temperature[4]; /*< [cdegC] Temperature of each ESC. INT16_MAX: if data not supplied by ESC.*/
+ uint16_t failure_flags[8]; /*<  Bitmap of ESC failure flags.*/
+ int16_t temperature[8]; /*< [cdegC] Temperature of each ESC. INT16_MAX: if data not supplied by ESC.*/
  uint8_t index; /*<  Index of the first ESC in this message. minValue = 0, maxValue = 60, increment = 4.*/
  uint8_t count; /*<  Total number of ESCs in all messages of this type. Message fields with an index higher than this should be ignored because they contain invalid data.*/
  uint8_t connection_type; /*<  Connection type protocol for all ESC.*/
  uint8_t info; /*<  Information regarding online/offline status of each ESC.*/
- uint8_t state[4]; /*<  State of ESC.*/
+ uint8_t state[8]; /*<  State of each ESC.*/
 } mavlink_esc_info_t;
 
-#define MAVLINK_MSG_ID_ESC_INFO_LEN 50
-#define MAVLINK_MSG_ID_ESC_INFO_MIN_LEN 50
-#define MAVLINK_MSG_ID_290_LEN 50
-#define MAVLINK_MSG_ID_290_MIN_LEN 50
+#define MAVLINK_MSG_ID_ESC_INFO_LEN 86
+#define MAVLINK_MSG_ID_ESC_INFO_MIN_LEN 86
+#define MAVLINK_MSG_ID_290_LEN 86
+#define MAVLINK_MSG_ID_290_MIN_LEN 86
 
-#define MAVLINK_MSG_ID_ESC_INFO_CRC 186
-#define MAVLINK_MSG_ID_290_CRC 186
+#define MAVLINK_MSG_ID_ESC_INFO_CRC 152
+#define MAVLINK_MSG_ID_290_CRC 152
 
-#define MAVLINK_MSG_ESC_INFO_FIELD_ERROR_COUNT_LEN 4
-#define MAVLINK_MSG_ESC_INFO_FIELD_FAILURE_FLAGS_LEN 4
-#define MAVLINK_MSG_ESC_INFO_FIELD_TEMPERATURE_LEN 4
-#define MAVLINK_MSG_ESC_INFO_FIELD_STATE_LEN 4
+#define MAVLINK_MSG_ESC_INFO_FIELD_ERROR_COUNT_LEN 8
+#define MAVLINK_MSG_ESC_INFO_FIELD_FAILURE_FLAGS_LEN 8
+#define MAVLINK_MSG_ESC_INFO_FIELD_TEMPERATURE_LEN 8
+#define MAVLINK_MSG_ESC_INFO_FIELD_STATE_LEN 8
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_ESC_INFO { \
     290, \
     "ESC_INFO", \
     10, \
-    {  { "index", NULL, MAVLINK_TYPE_UINT8_T, 0, 42, offsetof(mavlink_esc_info_t, index) }, \
+    {  { "index", NULL, MAVLINK_TYPE_UINT8_T, 0, 74, offsetof(mavlink_esc_info_t, index) }, \
          { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_esc_info_t, time_usec) }, \
-         { "counter", NULL, MAVLINK_TYPE_UINT16_T, 0, 24, offsetof(mavlink_esc_info_t, counter) }, \
-         { "count", NULL, MAVLINK_TYPE_UINT8_T, 0, 43, offsetof(mavlink_esc_info_t, count) }, \
-         { "connection_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 44, offsetof(mavlink_esc_info_t, connection_type) }, \
-         { "info", NULL, MAVLINK_TYPE_UINT8_T, 0, 45, offsetof(mavlink_esc_info_t, info) }, \
-         { "failure_flags", NULL, MAVLINK_TYPE_UINT16_T, 4, 26, offsetof(mavlink_esc_info_t, failure_flags) }, \
-         { "error_count", NULL, MAVLINK_TYPE_UINT32_T, 4, 8, offsetof(mavlink_esc_info_t, error_count) }, \
-         { "temperature", NULL, MAVLINK_TYPE_INT16_T, 4, 34, offsetof(mavlink_esc_info_t, temperature) }, \
-         { "state", NULL, MAVLINK_TYPE_UINT8_T, 4, 46, offsetof(mavlink_esc_info_t, state) }, \
+         { "counter", NULL, MAVLINK_TYPE_UINT16_T, 0, 40, offsetof(mavlink_esc_info_t, counter) }, \
+         { "count", NULL, MAVLINK_TYPE_UINT8_T, 0, 75, offsetof(mavlink_esc_info_t, count) }, \
+         { "connection_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 76, offsetof(mavlink_esc_info_t, connection_type) }, \
+         { "info", NULL, MAVLINK_TYPE_UINT8_T, 0, 77, offsetof(mavlink_esc_info_t, info) }, \
+         { "failure_flags", NULL, MAVLINK_TYPE_UINT16_T, 8, 42, offsetof(mavlink_esc_info_t, failure_flags) }, \
+         { "error_count", NULL, MAVLINK_TYPE_UINT32_T, 8, 8, offsetof(mavlink_esc_info_t, error_count) }, \
+         { "temperature", NULL, MAVLINK_TYPE_INT16_T, 8, 58, offsetof(mavlink_esc_info_t, temperature) }, \
+         { "state", NULL, MAVLINK_TYPE_UINT8_T, 8, 78, offsetof(mavlink_esc_info_t, state) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_ESC_INFO { \
     "ESC_INFO", \
     10, \
-    {  { "index", NULL, MAVLINK_TYPE_UINT8_T, 0, 42, offsetof(mavlink_esc_info_t, index) }, \
+    {  { "index", NULL, MAVLINK_TYPE_UINT8_T, 0, 74, offsetof(mavlink_esc_info_t, index) }, \
          { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_esc_info_t, time_usec) }, \
-         { "counter", NULL, MAVLINK_TYPE_UINT16_T, 0, 24, offsetof(mavlink_esc_info_t, counter) }, \
-         { "count", NULL, MAVLINK_TYPE_UINT8_T, 0, 43, offsetof(mavlink_esc_info_t, count) }, \
-         { "connection_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 44, offsetof(mavlink_esc_info_t, connection_type) }, \
-         { "info", NULL, MAVLINK_TYPE_UINT8_T, 0, 45, offsetof(mavlink_esc_info_t, info) }, \
-         { "failure_flags", NULL, MAVLINK_TYPE_UINT16_T, 4, 26, offsetof(mavlink_esc_info_t, failure_flags) }, \
-         { "error_count", NULL, MAVLINK_TYPE_UINT32_T, 4, 8, offsetof(mavlink_esc_info_t, error_count) }, \
-         { "temperature", NULL, MAVLINK_TYPE_INT16_T, 4, 34, offsetof(mavlink_esc_info_t, temperature) }, \
-         { "state", NULL, MAVLINK_TYPE_UINT8_T, 4, 46, offsetof(mavlink_esc_info_t, state) }, \
+         { "counter", NULL, MAVLINK_TYPE_UINT16_T, 0, 40, offsetof(mavlink_esc_info_t, counter) }, \
+         { "count", NULL, MAVLINK_TYPE_UINT8_T, 0, 75, offsetof(mavlink_esc_info_t, count) }, \
+         { "connection_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 76, offsetof(mavlink_esc_info_t, connection_type) }, \
+         { "info", NULL, MAVLINK_TYPE_UINT8_T, 0, 77, offsetof(mavlink_esc_info_t, info) }, \
+         { "failure_flags", NULL, MAVLINK_TYPE_UINT16_T, 8, 42, offsetof(mavlink_esc_info_t, failure_flags) }, \
+         { "error_count", NULL, MAVLINK_TYPE_UINT32_T, 8, 8, offsetof(mavlink_esc_info_t, error_count) }, \
+         { "temperature", NULL, MAVLINK_TYPE_INT16_T, 8, 58, offsetof(mavlink_esc_info_t, temperature) }, \
+         { "state", NULL, MAVLINK_TYPE_UINT8_T, 8, 78, offsetof(mavlink_esc_info_t, state) }, \
          } \
 }
 #endif
@@ -80,7 +80,7 @@ typedef struct __mavlink_esc_info_t {
  * @param failure_flags  Bitmap of ESC failure flags.
  * @param error_count  Number of reported errors by each ESC since boot.
  * @param temperature [cdegC] Temperature of each ESC. INT16_MAX: if data not supplied by ESC.
- * @param state  State of ESC.
+ * @param state  State of each ESC.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_esc_info_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -89,15 +89,15 @@ static inline uint16_t mavlink_msg_esc_info_pack(uint8_t system_id, uint8_t comp
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_ESC_INFO_LEN];
     _mav_put_uint64_t(buf, 0, time_usec);
-    _mav_put_uint16_t(buf, 24, counter);
-    _mav_put_uint8_t(buf, 42, index);
-    _mav_put_uint8_t(buf, 43, count);
-    _mav_put_uint8_t(buf, 44, connection_type);
-    _mav_put_uint8_t(buf, 45, info);
-    _mav_put_uint32_t_array(buf, 8, error_count, 4);
-    _mav_put_uint16_t_array(buf, 26, failure_flags, 4);
-    _mav_put_int16_t_array(buf, 34, temperature, 4);
-    _mav_put_uint8_t_array(buf, 46, state, 4);
+    _mav_put_uint16_t(buf, 40, counter);
+    _mav_put_uint8_t(buf, 74, index);
+    _mav_put_uint8_t(buf, 75, count);
+    _mav_put_uint8_t(buf, 76, connection_type);
+    _mav_put_uint8_t(buf, 77, info);
+    _mav_put_uint32_t_array(buf, 8, error_count, 8);
+    _mav_put_uint16_t_array(buf, 42, failure_flags, 8);
+    _mav_put_int16_t_array(buf, 58, temperature, 8);
+    _mav_put_uint8_t_array(buf, 78, state, 8);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_ESC_INFO_LEN);
 #else
     mavlink_esc_info_t packet;
@@ -107,10 +107,10 @@ static inline uint16_t mavlink_msg_esc_info_pack(uint8_t system_id, uint8_t comp
     packet.count = count;
     packet.connection_type = connection_type;
     packet.info = info;
-    mav_array_memcpy(packet.error_count, error_count, sizeof(uint32_t)*4);
-    mav_array_memcpy(packet.failure_flags, failure_flags, sizeof(uint16_t)*4);
-    mav_array_memcpy(packet.temperature, temperature, sizeof(int16_t)*4);
-    mav_array_memcpy(packet.state, state, sizeof(uint8_t)*4);
+    mav_array_memcpy(packet.error_count, error_count, sizeof(uint32_t)*8);
+    mav_array_memcpy(packet.failure_flags, failure_flags, sizeof(uint16_t)*8);
+    mav_array_memcpy(packet.temperature, temperature, sizeof(int16_t)*8);
+    mav_array_memcpy(packet.state, state, sizeof(uint8_t)*8);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_ESC_INFO_LEN);
 #endif
 
@@ -133,7 +133,7 @@ static inline uint16_t mavlink_msg_esc_info_pack(uint8_t system_id, uint8_t comp
  * @param failure_flags  Bitmap of ESC failure flags.
  * @param error_count  Number of reported errors by each ESC since boot.
  * @param temperature [cdegC] Temperature of each ESC. INT16_MAX: if data not supplied by ESC.
- * @param state  State of ESC.
+ * @param state  State of each ESC.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_esc_info_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -143,15 +143,15 @@ static inline uint16_t mavlink_msg_esc_info_pack_chan(uint8_t system_id, uint8_t
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_ESC_INFO_LEN];
     _mav_put_uint64_t(buf, 0, time_usec);
-    _mav_put_uint16_t(buf, 24, counter);
-    _mav_put_uint8_t(buf, 42, index);
-    _mav_put_uint8_t(buf, 43, count);
-    _mav_put_uint8_t(buf, 44, connection_type);
-    _mav_put_uint8_t(buf, 45, info);
-    _mav_put_uint32_t_array(buf, 8, error_count, 4);
-    _mav_put_uint16_t_array(buf, 26, failure_flags, 4);
-    _mav_put_int16_t_array(buf, 34, temperature, 4);
-    _mav_put_uint8_t_array(buf, 46, state, 4);
+    _mav_put_uint16_t(buf, 40, counter);
+    _mav_put_uint8_t(buf, 74, index);
+    _mav_put_uint8_t(buf, 75, count);
+    _mav_put_uint8_t(buf, 76, connection_type);
+    _mav_put_uint8_t(buf, 77, info);
+    _mav_put_uint32_t_array(buf, 8, error_count, 8);
+    _mav_put_uint16_t_array(buf, 42, failure_flags, 8);
+    _mav_put_int16_t_array(buf, 58, temperature, 8);
+    _mav_put_uint8_t_array(buf, 78, state, 8);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_ESC_INFO_LEN);
 #else
     mavlink_esc_info_t packet;
@@ -161,10 +161,10 @@ static inline uint16_t mavlink_msg_esc_info_pack_chan(uint8_t system_id, uint8_t
     packet.count = count;
     packet.connection_type = connection_type;
     packet.info = info;
-    mav_array_memcpy(packet.error_count, error_count, sizeof(uint32_t)*4);
-    mav_array_memcpy(packet.failure_flags, failure_flags, sizeof(uint16_t)*4);
-    mav_array_memcpy(packet.temperature, temperature, sizeof(int16_t)*4);
-    mav_array_memcpy(packet.state, state, sizeof(uint8_t)*4);
+    mav_array_memcpy(packet.error_count, error_count, sizeof(uint32_t)*8);
+    mav_array_memcpy(packet.failure_flags, failure_flags, sizeof(uint16_t)*8);
+    mav_array_memcpy(packet.temperature, temperature, sizeof(int16_t)*8);
+    mav_array_memcpy(packet.state, state, sizeof(uint8_t)*8);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_ESC_INFO_LEN);
 #endif
 
@@ -212,7 +212,7 @@ static inline uint16_t mavlink_msg_esc_info_encode_chan(uint8_t system_id, uint8
  * @param failure_flags  Bitmap of ESC failure flags.
  * @param error_count  Number of reported errors by each ESC since boot.
  * @param temperature [cdegC] Temperature of each ESC. INT16_MAX: if data not supplied by ESC.
- * @param state  State of ESC.
+ * @param state  State of each ESC.
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -221,15 +221,15 @@ static inline void mavlink_msg_esc_info_send(mavlink_channel_t chan, uint8_t ind
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_ESC_INFO_LEN];
     _mav_put_uint64_t(buf, 0, time_usec);
-    _mav_put_uint16_t(buf, 24, counter);
-    _mav_put_uint8_t(buf, 42, index);
-    _mav_put_uint8_t(buf, 43, count);
-    _mav_put_uint8_t(buf, 44, connection_type);
-    _mav_put_uint8_t(buf, 45, info);
-    _mav_put_uint32_t_array(buf, 8, error_count, 4);
-    _mav_put_uint16_t_array(buf, 26, failure_flags, 4);
-    _mav_put_int16_t_array(buf, 34, temperature, 4);
-    _mav_put_uint8_t_array(buf, 46, state, 4);
+    _mav_put_uint16_t(buf, 40, counter);
+    _mav_put_uint8_t(buf, 74, index);
+    _mav_put_uint8_t(buf, 75, count);
+    _mav_put_uint8_t(buf, 76, connection_type);
+    _mav_put_uint8_t(buf, 77, info);
+    _mav_put_uint32_t_array(buf, 8, error_count, 8);
+    _mav_put_uint16_t_array(buf, 42, failure_flags, 8);
+    _mav_put_int16_t_array(buf, 58, temperature, 8);
+    _mav_put_uint8_t_array(buf, 78, state, 8);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ESC_INFO, buf, MAVLINK_MSG_ID_ESC_INFO_MIN_LEN, MAVLINK_MSG_ID_ESC_INFO_LEN, MAVLINK_MSG_ID_ESC_INFO_CRC);
 #else
     mavlink_esc_info_t packet;
@@ -239,10 +239,10 @@ static inline void mavlink_msg_esc_info_send(mavlink_channel_t chan, uint8_t ind
     packet.count = count;
     packet.connection_type = connection_type;
     packet.info = info;
-    mav_array_memcpy(packet.error_count, error_count, sizeof(uint32_t)*4);
-    mav_array_memcpy(packet.failure_flags, failure_flags, sizeof(uint16_t)*4);
-    mav_array_memcpy(packet.temperature, temperature, sizeof(int16_t)*4);
-    mav_array_memcpy(packet.state, state, sizeof(uint8_t)*4);
+    mav_array_memcpy(packet.error_count, error_count, sizeof(uint32_t)*8);
+    mav_array_memcpy(packet.failure_flags, failure_flags, sizeof(uint16_t)*8);
+    mav_array_memcpy(packet.temperature, temperature, sizeof(int16_t)*8);
+    mav_array_memcpy(packet.state, state, sizeof(uint8_t)*8);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ESC_INFO, (const char *)&packet, MAVLINK_MSG_ID_ESC_INFO_MIN_LEN, MAVLINK_MSG_ID_ESC_INFO_LEN, MAVLINK_MSG_ID_ESC_INFO_CRC);
 #endif
 }
@@ -274,15 +274,15 @@ static inline void mavlink_msg_esc_info_send_buf(mavlink_message_t *msgbuf, mavl
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
     _mav_put_uint64_t(buf, 0, time_usec);
-    _mav_put_uint16_t(buf, 24, counter);
-    _mav_put_uint8_t(buf, 42, index);
-    _mav_put_uint8_t(buf, 43, count);
-    _mav_put_uint8_t(buf, 44, connection_type);
-    _mav_put_uint8_t(buf, 45, info);
-    _mav_put_uint32_t_array(buf, 8, error_count, 4);
-    _mav_put_uint16_t_array(buf, 26, failure_flags, 4);
-    _mav_put_int16_t_array(buf, 34, temperature, 4);
-    _mav_put_uint8_t_array(buf, 46, state, 4);
+    _mav_put_uint16_t(buf, 40, counter);
+    _mav_put_uint8_t(buf, 74, index);
+    _mav_put_uint8_t(buf, 75, count);
+    _mav_put_uint8_t(buf, 76, connection_type);
+    _mav_put_uint8_t(buf, 77, info);
+    _mav_put_uint32_t_array(buf, 8, error_count, 8);
+    _mav_put_uint16_t_array(buf, 42, failure_flags, 8);
+    _mav_put_int16_t_array(buf, 58, temperature, 8);
+    _mav_put_uint8_t_array(buf, 78, state, 8);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ESC_INFO, buf, MAVLINK_MSG_ID_ESC_INFO_MIN_LEN, MAVLINK_MSG_ID_ESC_INFO_LEN, MAVLINK_MSG_ID_ESC_INFO_CRC);
 #else
     mavlink_esc_info_t *packet = (mavlink_esc_info_t *)msgbuf;
@@ -292,10 +292,10 @@ static inline void mavlink_msg_esc_info_send_buf(mavlink_message_t *msgbuf, mavl
     packet->count = count;
     packet->connection_type = connection_type;
     packet->info = info;
-    mav_array_memcpy(packet->error_count, error_count, sizeof(uint32_t)*4);
-    mav_array_memcpy(packet->failure_flags, failure_flags, sizeof(uint16_t)*4);
-    mav_array_memcpy(packet->temperature, temperature, sizeof(int16_t)*4);
-    mav_array_memcpy(packet->state, state, sizeof(uint8_t)*4);
+    mav_array_memcpy(packet->error_count, error_count, sizeof(uint32_t)*8);
+    mav_array_memcpy(packet->failure_flags, failure_flags, sizeof(uint16_t)*8);
+    mav_array_memcpy(packet->temperature, temperature, sizeof(int16_t)*8);
+    mav_array_memcpy(packet->state, state, sizeof(uint8_t)*8);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ESC_INFO, (const char *)packet, MAVLINK_MSG_ID_ESC_INFO_MIN_LEN, MAVLINK_MSG_ID_ESC_INFO_LEN, MAVLINK_MSG_ID_ESC_INFO_CRC);
 #endif
 }
@@ -313,7 +313,7 @@ static inline void mavlink_msg_esc_info_send_buf(mavlink_message_t *msgbuf, mavl
  */
 static inline uint8_t mavlink_msg_esc_info_get_index(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  42);
+    return _MAV_RETURN_uint8_t(msg,  74);
 }
 
 /**
@@ -333,7 +333,7 @@ static inline uint64_t mavlink_msg_esc_info_get_time_usec(const mavlink_message_
  */
 static inline uint16_t mavlink_msg_esc_info_get_counter(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  24);
+    return _MAV_RETURN_uint16_t(msg,  40);
 }
 
 /**
@@ -343,7 +343,7 @@ static inline uint16_t mavlink_msg_esc_info_get_counter(const mavlink_message_t*
  */
 static inline uint8_t mavlink_msg_esc_info_get_count(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  43);
+    return _MAV_RETURN_uint8_t(msg,  75);
 }
 
 /**
@@ -353,7 +353,7 @@ static inline uint8_t mavlink_msg_esc_info_get_count(const mavlink_message_t* ms
  */
 static inline uint8_t mavlink_msg_esc_info_get_connection_type(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  44);
+    return _MAV_RETURN_uint8_t(msg,  76);
 }
 
 /**
@@ -363,7 +363,7 @@ static inline uint8_t mavlink_msg_esc_info_get_connection_type(const mavlink_mes
  */
 static inline uint8_t mavlink_msg_esc_info_get_info(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  45);
+    return _MAV_RETURN_uint8_t(msg,  77);
 }
 
 /**
@@ -373,7 +373,7 @@ static inline uint8_t mavlink_msg_esc_info_get_info(const mavlink_message_t* msg
  */
 static inline uint16_t mavlink_msg_esc_info_get_failure_flags(const mavlink_message_t* msg, uint16_t *failure_flags)
 {
-    return _MAV_RETURN_uint16_t_array(msg, failure_flags, 4,  26);
+    return _MAV_RETURN_uint16_t_array(msg, failure_flags, 8,  42);
 }
 
 /**
@@ -383,7 +383,7 @@ static inline uint16_t mavlink_msg_esc_info_get_failure_flags(const mavlink_mess
  */
 static inline uint16_t mavlink_msg_esc_info_get_error_count(const mavlink_message_t* msg, uint32_t *error_count)
 {
-    return _MAV_RETURN_uint32_t_array(msg, error_count, 4,  8);
+    return _MAV_RETURN_uint32_t_array(msg, error_count, 8,  8);
 }
 
 /**
@@ -393,17 +393,17 @@ static inline uint16_t mavlink_msg_esc_info_get_error_count(const mavlink_messag
  */
 static inline uint16_t mavlink_msg_esc_info_get_temperature(const mavlink_message_t* msg, int16_t *temperature)
 {
-    return _MAV_RETURN_int16_t_array(msg, temperature, 4,  34);
+    return _MAV_RETURN_int16_t_array(msg, temperature, 8,  58);
 }
 
 /**
  * @brief Get field state from esc_info message
  *
- * @return  State of ESC.
+ * @return  State of each ESC.
  */
 static inline uint16_t mavlink_msg_esc_info_get_state(const mavlink_message_t* msg, uint8_t *state)
 {
-    return _MAV_RETURN_uint8_t_array(msg, state, 4,  46);
+    return _MAV_RETURN_uint8_t_array(msg, state, 8,  78);
 }
 
 /**

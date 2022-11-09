@@ -11181,7 +11181,7 @@ static void mavlink_test_esc_info(uint8_t system_id, uint8_t component_id, mavli
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_esc_info_t packet_in = {
-        93372036854775807ULL,{ 963497880, 963497881, 963497882, 963497883 },18483,{ 18587, 18588, 18589, 18590 },{ 19003, 19004, 19005, 19006 },3,70,137,204,{ 15, 16, 17, 18 }
+        93372036854775807ULL,{ 963497880, 963497881, 963497882, 963497883, 963497884, 963497885, 963497886, 963497887 },19315,{ 19419, 19420, 19421, 19422, 19423, 19424, 19425, 19426 },{ 20251, 20252, 20253, 20254, 20255, 20256, 20257, 20258 },99,166,233,44,{ 111, 112, 113, 114, 115, 116, 117, 118 }
     };
     mavlink_esc_info_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -11192,10 +11192,10 @@ static void mavlink_test_esc_info(uint8_t system_id, uint8_t component_id, mavli
         packet1.connection_type = packet_in.connection_type;
         packet1.info = packet_in.info;
         
-        mav_array_memcpy(packet1.error_count, packet_in.error_count, sizeof(uint32_t)*4);
-        mav_array_memcpy(packet1.failure_flags, packet_in.failure_flags, sizeof(uint16_t)*4);
-        mav_array_memcpy(packet1.temperature, packet_in.temperature, sizeof(int16_t)*4);
-        mav_array_memcpy(packet1.state, packet_in.state, sizeof(uint8_t)*4);
+        mav_array_memcpy(packet1.error_count, packet_in.error_count, sizeof(uint32_t)*8);
+        mav_array_memcpy(packet1.failure_flags, packet_in.failure_flags, sizeof(uint16_t)*8);
+        mav_array_memcpy(packet1.temperature, packet_in.temperature, sizeof(int16_t)*8);
+        mav_array_memcpy(packet1.state, packet_in.state, sizeof(uint8_t)*8);
         
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
         if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
@@ -11249,16 +11249,16 @@ static void mavlink_test_esc_status(uint8_t system_id, uint8_t component_id, mav
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_esc_status_t packet_in = {
-        93372036854775807ULL,{ 963497880, 963497881, 963497882, 963497883 },{ 185.0, 186.0, 187.0, 188.0 },{ 297.0, 298.0, 299.0, 300.0 },173
+        93372036854775807ULL,{ 963497880, 963497881, 963497882, 963497883, 963497884, 963497885, 963497886, 963497887 },{ 297.0, 298.0, 299.0, 300.0, 301.0, 302.0, 303.0, 304.0 },{ 521.0, 522.0, 523.0, 524.0, 525.0, 526.0, 527.0, 528.0 },61
     };
     mavlink_esc_status_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
         packet1.time_usec = packet_in.time_usec;
         packet1.index = packet_in.index;
         
-        mav_array_memcpy(packet1.rpm, packet_in.rpm, sizeof(int32_t)*4);
-        mav_array_memcpy(packet1.voltage, packet_in.voltage, sizeof(float)*4);
-        mav_array_memcpy(packet1.current, packet_in.current, sizeof(float)*4);
+        mav_array_memcpy(packet1.rpm, packet_in.rpm, sizeof(int32_t)*8);
+        mav_array_memcpy(packet1.voltage, packet_in.voltage, sizeof(float)*8);
+        mav_array_memcpy(packet1.current, packet_in.current, sizeof(float)*8);
         
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
         if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
